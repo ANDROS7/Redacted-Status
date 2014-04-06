@@ -13,7 +13,7 @@
 		<div id="footer">
 		 	<div class="container">
 				<center>
-					<h4>This nifty little status page is brought to you by <a href="http://impy.me/" target="_blank">Imperative</a></h4>
+					<h4>This nifty little <a href="https://github.com/Impyy/Redacted-Status" target="_blank">open source</a> status page is brought to you by <a href="http://impy.me/" target="_blank">Imperative</a></h4>
 				</center>
 		  	</div>
 		</div>
@@ -98,6 +98,7 @@
 							  	</div>
 							  	<div class="panel-body">
 									<p>The people who are not matchmaking are most likely playing against bots or have already found a lobby.</p>
+									<p>The lobby count is currently incorrect or not showing at all. This is due to the api being partially not functional</p>
 							  	</div>
 							</div>
 							<a class="twitter-timeline" height="400" href="https://twitter.com/REDACTED_t6"  data-widget-id="452421732503023616">Tweets by @REDACTED_t6</a>
