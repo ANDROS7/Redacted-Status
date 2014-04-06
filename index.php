@@ -49,7 +49,7 @@
 										$forumlink = get_forum_url($user["phpbb_user_id"]);
 										$avatar = get_avatar($user);
 										$country = strtolower($user["countryName"]);
-
+										
 										if (array_key_exists($username, $staff))
 											$color = $staff[$username];
 										else
@@ -98,7 +98,7 @@
 							  	</div>
 							  	<div class="panel-body">
 									<p>The people who are not matchmaking are most likely playing against bots or have already found a lobby.</p>
-									<p>The lobby count is currently incorrect or not showing at all. This is due to the api being partially not functional</p>
+									<p>The lobby count is currently incorrect or not showing at all. This is due to the api being partially not functional.</p>
 							  	</div>
 							</div>
 							<a class="twitter-timeline" height="400" href="https://twitter.com/REDACTED_t6"  data-widget-id="452421732503023616">Tweets by @REDACTED_t6</a>
