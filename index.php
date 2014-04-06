@@ -49,7 +49,7 @@
 										$forumlink = get_forum_url($user["phpbb_user_id"]);
 										$avatar = get_avatar($user);
 										$country = strtolower($user["countryName"]);
-										
+
 										if (array_key_exists($username, $staff))
 											$color = $staff[$username];
 										else
@@ -83,12 +83,12 @@
 							    	<p>Server Status: 
 			            				<?php
 			            					if (server_is_up())
-			            						print("<span style=\"color:green\">Online</span>");
+			            						print("<span id=\"onlineindicator\" style=\"color:green\">Online</span>");
 			            					else
-			            						print("<span style=\"color:red\">Offline</span>");
+			            						print("<span id=\"onlineindicator\" style=\"color:red\">Offline</span>");
 			            				?>
 		            				</p>
-		            				<p>Online Users: <?php print(get_online_user_count()); ?></p>
+		            				<p id="onlinecount">Online Users: <?php print(get_online_user_count()); ?></p>
 		            				<p>Lobbies: <?php print(get_session_count()); ?></p>
 								</div>
 							</div>
@@ -114,6 +114,48 @@
 			        $("#playertable").tablesorter();
 			    }
 			);
+		</script>
+		<script>
+			setInterval(function(){
+				$.ajax({
+					url: "status.php",
+					type: "GET",
+					data: { },
+					success: function(data) {
+						if(data["status"] == "OK"){
+							var table = document.getElementById("playertable");
+
+							if (data["result"]["server"]["is_online"] == "1"){
+								$("#onlineindicator").html("<span id=\"onlineindicator\" style=\"color:green\">Online</span>");
+							} else {
+								$("#onlineindicator").html("<span id=\"onlineindicator\" style=\"color:red\">Offline</span>");
+							}
+
+							$("#onlinecount").text("Online Users: " + data["result"]["server"]["users_online"]);
+
+							$("#playertable tr:not(:first)").remove();
+
+							for(var username in data["result"]["users"]){
+								var row = table.insertRow(table.rows.length);
+								row.insertCell(0).innerHTML = "<img id=\"avatar\" src=\"" + data["result"]["users"][username]["avatar"] + "\"> " + username;
+
+								if (data["result"]["users"][username]["is_matchmaking"] == "1"){
+									row.insertCell(1).innerHTML = "Yes";
+								} else {
+									row.insertCell(1).innerHTML = "No";
+								}
+
+								row.insertCell(2).innerHTML = "<img src=\"" + data["result"]["users"][username]["flag"] + "\">";
+							}
+						} else {
+							console.log("Error while obtaining information from the api: " + data["error"]);
+						}
+					},
+					error: function(data) {
+						console.log("Error while obtaining information from the api");
+					}
+				});
+			},15000);
 		</script>
 	</body>
 </html>

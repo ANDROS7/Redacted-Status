@@ -83,15 +83,19 @@ function server_is_up()
 	$timeout = 5;
 	$err = null;
 
-	if ($s = fsockopen($host, $port, $errCode, $err, $timeout))
+	try
 	{
-		fclose($s);
-		return true;
+		if ($s = fsockopen($host, $port, $errCode, $err, $timeout))
+		{
+			fclose($s);
+			return true;
+		}
+		else
+		{
+			return false;
+		}
 	}
-	else
-	{
-		return false;
-	}
+	catch(Exception $e) { return false; }
 }
 
 ?>

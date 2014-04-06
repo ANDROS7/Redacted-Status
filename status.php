@@ -7,7 +7,7 @@
 
 require_once("includes/tools.php");
 
-header("Content-Type: application/json")
+header("Content-Type: application/json");
 
 if (!isset($_GET))
 	die();
@@ -18,16 +18,13 @@ if (!$users = get_online_users()) { }
 $userarray = array();
 foreach($users as $user)
 {
-	$a = array(
-		"country_code"=>strtolower($user["countryName"]),
-		"username"=>$user["username"],
+	$userarray[$user["username"]] = array(
+		"flag"=>"assets/img/flags/" . strtolower($user["countryName"]) . ".png",
 		"forum_link"=>get_forum_url($user["phpbb_user_id"]),
 		"avatar"=>get_avatar($user),
-		"color"=>array_key_exists($user["username"], $staff) ? $staff[$username] : "#FFFFFF",
+		"color"=>array_key_exists($user["username"], $staff) ? $staff[$user["username"]] : "#FFFFFF",
 		"is_matchmaking"=>$user["isMatchmaking"]
 		);
-
-	array_push($userarray, $a);
 }
 
 $serverinfo = array(
@@ -38,11 +35,11 @@ $serverinfo = array(
 
 $jsonobj = array(
 	"status"=>"OK",
-	"error"=>"",
+	"error"=>null,
 	"result"=>array("server"=>$serverinfo, "users"=>$userarray)
 	);
 
-die(json_encode($jsonobj));
+die(json_encode($jsonobj)); //JSON_FORCE_OBJECT
 
 function die_with_error($error)
 {
