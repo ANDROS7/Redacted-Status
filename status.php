@@ -7,6 +7,8 @@
 
 require_once("includes/tools.php");
 
+header("Content-Type: application/json")
+
 if (!isset($_GET))
 	die();
 
