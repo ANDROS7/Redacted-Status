@@ -28,7 +28,7 @@
 					<div class="col-lg-6">
 		    			<div class="bs-component">
 		    				<div class="panel panel-default">
-							<div class="panel-heading">Currently Online: </div>
+							<div class="panel-heading">Currently Online </div>
 								<table id="playertable" class="table table-hover">
 								    <thead>
 							    		<tr>
@@ -77,7 +77,7 @@
 		            	<div class="bs-component">
 		            		<div class="panel panel-default">
 							  	<div class="panel-heading">
-							    	<h3 class="panel-title">General Stats: </h3>
+							    	<h3 class="panel-title">General Stats </h3>
 								</div>
 								<div class="panel-body">
 							    	<p>Server Status: 
@@ -94,7 +94,7 @@
 							</div>
 		            		<div class="panel panel-default">
 							  	<div class="panel-heading">
-							    	<h3 class="panel-title">Note: </h3>
+							    	<h3 class="panel-title">Note </h3>
 							  	</div>
 							  	<div class="panel-body">
 									<p>The people who are not matchmaking are most likely playing against bots or have already found a lobby.</p>
@@ -137,7 +137,7 @@
 
 							for(var username in data["result"]["users"]){
 								var row = table.insertRow(table.rows.length);
-								row.insertCell(0).innerHTML = "<img id=\"avatar\" src=\"" + data["result"]["users"][username]["avatar"] + "\"> " + username;
+								row.insertCell(0).innerHTML = "<img id=\"avatar\" src=\"" + data["result"]["users"][username]["avatar"] + "\"> <a style=\"color:" + data["result"]["users"][username]["color"] + "\"href=\"" + data["result"]["users"][username]["forum_link"] + "\" target=\"_blank\">" + username + "</a>";
 
 								if (data["result"]["users"][username]["is_matchmaking"] == "1"){
 									row.insertCell(1).innerHTML = "Yes";
