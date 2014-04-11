@@ -40,9 +40,7 @@
 							      	<tbody>
 									<?php 
 
-									if (!$users = get_online_users())
-										print("Could not get users");
-
+									$users = get_online_users();
 									foreach($users as $user)
 									{
 										$username = $user["username"];
