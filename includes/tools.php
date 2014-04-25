@@ -10,7 +10,6 @@ $staff = array(
 	"MAGIC"=>"#00c3ff",
 	"Menno"=>"#00c3ff",
 	"FaceHunter"=>"#00c3ff",
-	"Imperative"=>"#00c3ff",
 	"Seth"=>"#00c3ff",
 
 	"arrivance"=>"#00CC00",
