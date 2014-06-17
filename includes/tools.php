@@ -18,32 +18,11 @@ $staff = array(
 	"yolarrydabomb"=>"#00CC00",
 );
 
-function get_sessions()
-{
-	$response = file_get_contents("http://api.redacted.se/?a=getSessions");
-	$obj = json_decode($response, true);
-
-	if ($obj["status"] != "OK")
-		return false;
-
-	return $obj["data"];
-}
-
 function get_forum_url($id)
 {
 	return "http://redacted.se/memberlist.php?mode=viewprofile&u=" . $id;
 }
 
-function get_online_users()
-{
-	$response = file_get_contents("http://api.redacted.se/?a=getOnlineUsers");
-	$obj = json_decode($response, true);
-
-	if ($obj["status"] != "OK")
-		return false;
-
-	return $obj["data"];
-}
 
 function get_avatar($user)
 {
@@ -53,48 +32,15 @@ function get_avatar($user)
 		return $user["user_avatar"];
 }
 
-function get_session_count()
+function get_server_info()
 {
-	$response = file_get_contents("http://api.redacted.se/?a=getSessionCount");
+	$response = file_get_contents("http://services-dev.redacted.se/status");
 	$obj = json_decode($response, true);
 
-	if ($obj["status"] != "OK")
+	if ($obj["result"] != "Ok")
 		return false;
 
 	return $obj["data"];
-}
-
-function get_online_user_count()
-{
-	$response = file_get_contents("http://api.redacted.se/?a=getOnlineCount");
-	$obj = json_decode($response, true);
-
-	if ($obj["status"] != "OK")
-		return false;
-
-	return $obj["data"];
-}
-
-function server_is_up()
-{
-	$host = "62.210.146.3";
-	$port = 3505;
-	$timeout = 5;
-	$err = null;
-
-	try
-	{
-		if ($s = fsockopen($host, $port, $errCode, $err, $timeout))
-		{
-			fclose($s);
-			return true;
-		}
-		else
-		{
-			return false;
-		}
-	}
-	catch(Exception $e) { return false; }
 }
 
 ?>

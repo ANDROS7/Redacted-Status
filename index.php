@@ -38,9 +38,10 @@
 							    		</tr>
 							      	</thead>
 							      	<tbody>
-									<?php 
+									<?php
+									$serverinfo = get_server_info();
 
-									$users = get_online_users();
+									/*$users = get_online_users();
 									foreach($users as $user)
 									{
 										$username = $user["username"];
@@ -63,7 +64,7 @@
 
 										print("<td><img src=\"assets/img/flags/$country.png\"></td>");
 										print("</tr>");
-									}
+									}*/
 
 									?>
 									</tbody>
@@ -78,26 +79,27 @@
 							    	<h3 class="panel-title">General Stats </h3>
 								</div>
 								<div class="panel-body">
-							    	<p>Server Status: 
+							    	<p>Master server:
 			            				<?php
-			            					if (server_is_up())
-			            						print("<span id=\"onlineindicator\" style=\"color:green\">Online</span>");
+			            					if ($serverinfo["TCPService"])
+			            						print("<span id=\"masteronlineindicator\" style=\"color:green\">Online</span>");
 			            					else
-			            						print("<span id=\"onlineindicator\" style=\"color:red\">Offline</span>");
+			            						print("<span id=\"masteronlineindicator\" style=\"color:red\">Offline</span>");
 			            				?>
 		            				</p>
-		            				<p id="onlinecount">Online Users: <?php print(get_online_user_count()); ?></p>
-		            				<p>Lobbies: <?php print(get_session_count()); ?></p>
+		            				<p>Web server:
+		            					<?php
+
+		            					if ($serverinfo["WebService"])
+		            						print("<span id=\"webserveronlineindicator\" style=\"color:green\">Online</span>");
+		            					else
+		            						print("<span id=\"webserveronlineindicator\" style=\"color:red\">Offline</span>");
+
+		            					?>
+		            				</p>
+		            				<p id="onlinecount">Online Users: <?php $users_online = $serverinfo["playersOnline"]; print("$users_online"); ?></p>
+		            				<p id="servercount">Servers: <?php $dedi_count = $serverinfo["dedicatedOnline"]; print("$dedi_count"); ?> </p>
 								</div>
-							</div>
-		            		<div class="panel panel-default">
-							  	<div class="panel-heading">
-							    	<h3 class="panel-title">Note </h3>
-							  	</div>
-							  	<div class="panel-body">
-									<p>The people who are not matchmaking are most likely playing against bots or have already found a lobby.</p>
-									<p>The lobby count is currently incorrect or not showing at all. This is due to the api being partially not functional.</p>
-							  	</div>
 							</div>
 							<a class="twitter-timeline" height="400" href="https://twitter.com/REDACTED_t6"  data-widget-id="452421732503023616">Tweets by @REDACTED_t6</a>
 		    				<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
@@ -123,13 +125,20 @@
 						if(data["status"] == "OK"){
 							var table = document.getElementById("playertable");
 
-							if (data["result"]["server"]["is_online"] == "1"){
-								$("#onlineindicator").html("<span id=\"onlineindicator\" style=\"color:green\">Online</span>");
+							if (data["result"]["server"]["is_master_online"] == "1"){
+								$("#masteronlineindicator").html("<span id=\"masteronlineindicator\" style=\"color:green\">Online</span>");
 							} else {
-								$("#onlineindicator").html("<span id=\"onlineindicator\" style=\"color:red\">Offline</span>");
+								$("#masteronlineindicator").html("<span id=\"masteronlineindicator\" style=\"color:red\">Offline</span>");
+							}
+
+							if (data["result"]["server"]["is_webserver_online"] == "1"){
+								$("#webserveronlineindicator").html("<span id=\"webserveronlineindicator\" style=\"color:green\">Online</span>");
+							} else {
+								$("#webserveronlineindicator").html("<span id=\"webserveronlineindicator\" style=\"color:red\">Offline</span>");
 							}
 
 							$("#onlinecount").text("Online Users: " + data["result"]["server"]["users_online"]);
+							$("#servercount").text("Servers: " + data["result"]["server"]["dedi_count"]);
 
 							$("#playertable tr:not(:first)").remove();
 
