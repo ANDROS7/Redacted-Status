@@ -144,7 +144,7 @@
 
 							for(var username in data["result"]["users"]){
 								var row = table.insertRow(table.rows.length);
-								row.insertCell(0).innerHTML = "<img id=\"avatar\" src=\"" + data["result"]["users"][username]["avatar"] + "\"> <a style=\"color:" + data["result"]["users"][username]["color"] + "\"href=\"" + data["result"]["users"][username]["forum_link"] + "\" target=\"_blank\">" + username + "</a>";
+								row.insertCell(0).innerHTML = "<img id=\"avatar\" src=\"" + data["result"]["users"][username]["avatar"] + "\"> <span style=\"color:" + data["result"]["users"][username]["color"] + "\">" + username + "</span>";
 
 								if (data["result"]["users"][username]["is_matchmaking"] == "1"){
 									row.insertCell(1).innerHTML = "Yes";
@@ -152,7 +152,7 @@
 									row.insertCell(1).innerHTML = "No";
 								}
 
-								row.insertCell(2).innerHTML = "<img src=\"" + data["result"]["users"][username]["flag"] + "\">";
+								//row.insertCell(2).innerHTML = "<img src=\"" + data["result"]["users"][username]["flag"] + "\">";
 							}
 						} else {
 							console.log("Error while obtaining information from the api: " + data["error"]);
