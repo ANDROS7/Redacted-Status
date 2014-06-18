@@ -34,20 +34,20 @@
 							    		<tr>
 							    			<th>Username</th>
 							    			<th>Matchmaking</th>
-							    			<th>From</th>
+							    			<!--<th>From</th>-->
 							    		</tr>
 							      	</thead>
 							      	<tbody>
 									<?php
 									$serverinfo = get_server_info();
 
-									/*$users = get_online_users();
+									$users = get_online_users();
 									foreach($users as $user)
 									{
 										$username = $user["username"];
-										$forumlink = get_forum_url($user["phpbb_user_id"]);
-										$avatar = get_avatar($user);
-										$country = strtolower($user["countryName"]);
+										//$forumlink = get_forum_url($user["phpbb_user_id"]);
+										$avatar = "assets/img/noavatar.png";//get_avatar($user);
+										//$country = strtolower($user["countryName"]);
 
 										if (array_key_exists($username, $staff))
 											$color = $staff[$username];
@@ -55,16 +55,16 @@
 											$color = "#FFFFFF";
 
 										print("<tr>");
-										print("<td><img id=\"avatar\" src=\"$avatar\"> <a style=\"color:$color\"href=\"$forumlink\" target=\"_blank\">$username</a></td>");
+										print("<td><img id=\"avatar\" src=\"$avatar\"> <span style=\"color:$color\">$username</span></td>");
 
-										if ($user["isMatchmaking"])
+										if ($user["matchmaking"])
 											print("<td>Yes</td>");
 										else
 											print("<td>No</td>");
 
-										print("<td><img src=\"assets/img/flags/$country.png\"></td>");
+										//print("<td><img src=\"assets/img/flags/$country.png\"></td>");
 										print("</tr>");
-									}*/
+									}
 
 									?>
 									</tbody>

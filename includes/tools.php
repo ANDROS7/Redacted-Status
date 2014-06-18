@@ -23,6 +23,16 @@ function get_forum_url($id)
 	return "http://redacted.se/memberlist.php?mode=viewprofile&u=" . $id;
 }
 
+function get_online_users()
+{
+	$response = file_get_contents("http://services-dev.redacted.se/getClientList");
+	$obj = json_decode($response, true);
+
+	if ($obj["result"] != "Ok")
+		return false;
+
+	return $obj["data"];
+}
 
 function get_avatar($user)
 {

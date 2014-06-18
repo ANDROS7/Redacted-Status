@@ -11,16 +11,16 @@ if (!isset($_GET))
 	//die_with_error("Could not get online users");
 
 $userarray = array();
-/*foreach($users as $user)
+foreach($users as $user)
 {
 	$userarray[$user["username"]] = array(
-		"flag"=>"assets/img/flags/" . strtolower($user["countryName"]) . ".png",
-		"forum_link"=>get_forum_url($user["phpbb_user_id"]),
-		"avatar"=>get_avatar($user),
+		//"flag"=>"assets/img/flags/" . strtolower($user["countryName"]) . ".png",
+		//"forum_link"=>get_forum_url($user["phpbb_user_id"]),
+		//"avatar"=>get_avatar($user),
 		"color"=>array_key_exists($user["username"], $staff) ? $staff[$user["username"]] : "#FFFFFF",
-		"is_matchmaking"=>$user["isMatchmaking"]
+		"is_matchmaking"=>$user["matchmaking"]
 		);
-}*/
+}
 
 $info = get_server_info();
 
